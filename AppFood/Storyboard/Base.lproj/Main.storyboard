@@ -177,8 +177,23 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="emptyRestaurantView" destination="IdF-kf-TZI" id="Jy0-cZ-6UG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e9e-PK-1Uk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="NkZ-Gh-M0l">
+                    <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="emptydata" translatesAutoresizingMaskIntoConstraints="NO" id="IdF-kf-TZI">
+                            <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="wzM-rP-HGc"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="103" y="-113"/>
         </scene>
@@ -229,18 +244,6 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10D-kM-vBS">
-                                            <rect key="frame" x="335" y="18" width="37" height="31"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="31" id="5BS-jV-sS7"/>
-                                                <constraint firstAttribute="width" constant="37" id="rt5-Hl-xLm"/>
-                                            </constraints>
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system">
-                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30"/>
-                                            </buttonConfiguration>
-                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
@@ -249,14 +252,12 @@
                                         <constraint firstItem="cnC-IA-lUZ" firstAttribute="top" secondItem="tSf-fF-qna" secondAttribute="top" id="7aU-ES-JHL"/>
                                         <constraint firstItem="OxK-ud-MDo" firstAttribute="bottom" secondItem="ZVb-I1-dlQ" secondAttribute="bottom" id="MPl-hX-HzD"/>
                                         <constraint firstItem="OxK-ud-MDo" firstAttribute="leading" secondItem="tSf-fF-qna" secondAttribute="leading" constant="20" id="St8-zb-Tyk"/>
-                                        <constraint firstItem="10D-kM-vBS" firstAttribute="top" secondItem="tSf-fF-qna" secondAttribute="topMargin" constant="10" id="T1P-ED-naW"/>
                                         <constraint firstAttribute="bottom" secondItem="cnC-IA-lUZ" secondAttribute="bottom" id="W3l-pA-gQZ"/>
                                         <constraint firstAttribute="bottom" secondItem="OxK-ud-MDo" secondAttribute="bottom" constant="20" id="Wbd-b9-2Yo"/>
                                         <constraint firstAttribute="trailing" secondItem="ZVb-I1-dlQ" secondAttribute="trailing" constant="20" id="Xhw-Rl-DmY"/>
                                         <constraint firstAttribute="trailing" secondItem="cnC-IA-lUZ" secondAttribute="trailing" id="ekl-5b-0NJ"/>
                                         <constraint firstAttribute="bottom" secondItem="zqk-Ml-0kE" secondAttribute="bottom" id="qbP-dp-vwK"/>
                                         <constraint firstItem="cnC-IA-lUZ" firstAttribute="leading" secondItem="tSf-fF-qna" secondAttribute="leading" id="v6i-pA-nFP"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="10D-kM-vBS" secondAttribute="trailing" constant="10" id="xHK-yq-AFo"/>
                                         <constraint firstItem="zqk-Ml-0kE" firstAttribute="leading" secondItem="tSf-fF-qna" secondAttribute="leading" id="yf9-4w-fyn"/>
                                         <constraint firstItem="zqk-Ml-0kE" firstAttribute="top" secondItem="tSf-fF-qna" secondAttribute="top" id="zq8-KE-wUa"/>
                                     </constraints>
@@ -419,7 +420,20 @@
                             <constraint firstItem="4o4-P5-Gbv" firstAttribute="trailing" secondItem="N3l-rx-4wz" secondAttribute="trailing" id="vt7-ZX-ZDT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Vce-Mb-6iH"/>
+                    <navigationItem key="navigationItem" id="Vce-Mb-6iH">
+                        <barButtonItem key="rightBarButtonItem" style="done" id="tog-lv-XSn">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="10D-kM-vBS">
+                                <rect key="frame" x="303.33333333333331" y="0.0" width="70.666666666666686" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30"/>
+                                    <color key="baseForegroundColor" name="NavigationBarTitle"/>
+                                </buttonConfiguration>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="headerView" destination="tSf-fF-qna" id="2Ir-KE-ama"/>
                         <outlet property="tableView" destination="N3l-rx-4wz" id="hdW-0A-K1G"/>
@@ -857,9 +871,10 @@
         <segue reference="AL6-KI-hmB"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="angry" width="128" height="128"/>
+        <image name="angry" width="78" height="103"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="cool" width="78" height="83"/>
+        <image name="emptydata" width="1440" height="1024"/>
         <image name="happy" width="78" height="86"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>

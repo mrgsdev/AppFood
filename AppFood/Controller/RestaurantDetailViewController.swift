@@ -37,11 +37,14 @@ class RestaurantDetailViewController: UIViewController {
     func headerViewSetting()  {
         headerView.nameLabel.text = restaurant.name
         headerView.typeLabel.text = restaurant.type
-        headerView.headerImageView.image = UIImage(named: restaurant.image)
+        headerView.headerImageView.image = UIImage(data: restaurant.image)
         let heartImage = restaurant.isFavorite ? "heart.fill" : "heart"
         headerView.heartButton.tintColor = restaurant.isFavorite ? .systemYellow : .white
         headerView.heartButton.setImage(UIImage(systemName: heartImage), for:
                 .normal)
+        if let rating = restaurant.rating {
+            headerView.ratingImageView.image = UIImage(named: rating.image)
+        }
     }
     
     /*
@@ -75,9 +78,12 @@ class RestaurantDetailViewController: UIViewController {
         }
         dismiss(animated: true, completion: {
             if let rating = Restaurant.Rating(rawValue: identifier) {
-                print(rating)
                 self.restaurant.rating = rating
                 self.headerView.ratingImageView.image = UIImage(named: rating.image)
+                
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                    appDelegate.saveContext()
+                }
             }
             let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
             self.headerView.ratingImageView.transform = scaleTransform
@@ -100,7 +106,7 @@ extension RestaurantDetailViewController: UITableViewDataSource, UITableViewDele
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantDetailTextCell", for: indexPath) as! RestaurantDetailTextCell
             cell.selectionStyle = .none
-            cell.descriptionLabel.text = restaurant.description
+            cell.descriptionLabel.text = restaurant.summary
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantDetailTwoColumnCell", for: indexPath) as! RestaurantDetailTwoColumnCell

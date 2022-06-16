@@ -6,8 +6,9 @@
 //
 
 import UIKit
-
+import CoreData
 class NewRestaurantController: UITableViewController {
+    var restaurant: Restaurant!
     @IBOutlet var nameTextField: RoundedTextField! {
         didSet {
             nameTextField.tag = 1
@@ -78,20 +79,31 @@ class NewRestaurantController: UITableViewController {
     }
     // MARK: - Table view data source
     @IBAction func saveButtonTapped(sender: UIButton) {
-  if nameTextField.text == "" || typeTextField.text == "" || addressTextField.text == "" || phoneTextField.text == "" || descriptionTextView.text == "" {
-        let alertController = UIAlertController(title: "Ой!😱", message: "Мы не можем продолжить, потому что одно из полей не заполнено. Обратите внимание, что все поля обязательны для заполнения.", preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK👌", style: .default, handler: nil)
-        alertController.addAction(alertAction)
-        present(alertController, animated: true, completion: nil)
+        if nameTextField.text == "" || typeTextField.text == "" || addressTextField.text == "" || phoneTextField.text == "" || descriptionTextView.text == "" {
+            let alertController = UIAlertController(title: "Oops", message: "We can't proceed because one of the fields is blank. Please note that all fields are required.", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(alertAction)
+            present(alertController, animated: true, completion: nil)
+            
+            return
+        }
         
-        return
-    }
-        
-        print("Name: \(nameTextField.text ?? "")")
-        print("Type: \(typeTextField.text ?? "")")
-        print("Location: \(addressTextField.text ?? "")")
-        print("Phone: \(phoneTextField.text ?? "")")
-        print("Description: \(descriptionTextView.text ?? "")")
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            restaurant = Restaurant(context: appDelegate.persistentContainer.viewContext)
+            restaurant.name = nameTextField.text!
+            restaurant.type = typeTextField.text!
+            restaurant.location = addressTextField.text!
+            restaurant.phone = phoneTextField.text!
+            restaurant.summary = descriptionTextView.text
+            restaurant.isFavorite = false
+
+            if let imageData = photoImageView.image?.pngData() {
+                restaurant.image = imageData
+            }
+
+            print("Saving data to context...")
+            appDelegate.saveContext()
+        }
         
         dismiss(animated: true, completion: nil)
     }

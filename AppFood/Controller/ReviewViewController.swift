@@ -13,7 +13,7 @@ class ReviewViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet var backgroundImageView: UIImageView!{
         didSet{
-            backgroundImageView.image = UIImage(named: restaurant.image)
+            backgroundImageView.image = UIImage(data: restaurant.image)
             
         }
     }
