@@ -1,6 +1,6 @@
 
 ## Custom NavigationController
-''' swift
+``` swift
     func customNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.backButtonTitle = ""
@@ -16,4 +16,44 @@
             navigationController?.navigationBar.scrollEdgeAppearance = appearance
         }
     }
-'''
+``` 
+## UITableViewDiffableDataSource
+``` swift
+    func configureDataSource() -> RestaurantDiffableDataSource {
+        let cellID = "datacell"
+        
+        let dataSource = RestaurantDiffableDataSource (tableView: tableView) { tableView, indexPath, restaurant in
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! RestaurantTableViewCell
+            cell.nameLabel?.text = restaurant.name // restaruntname
+            cell.locationLabel.text = self.restaurants[indexPath.row].location
+            cell.typeLabel.text = self.restaurants[indexPath.row].type
+            cell.thumbnailImageView?.image = UIImage(named: restaurant.image)
+            cell.favoriteImageView.isHidden = self.restaurants[indexPath.row].isFavorite ? false : true
+            return cell
+        }
+        return dataSource
+    }
+    
+    func updateDataSource() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section,Restaurant>()
+        snapshot.appendSections([.all])
+        snapshot.appendItems(restaurants, toSection: .all)
+        dataSource.apply(snapshot, animatingDifferences: false,completion: nil)
+    }
+``` 
+``` swift
+enum Section {
+    case all
+}
+class RestaurantDiffableDataSource: UITableViewDiffableDataSource<Section, Restaurant> {
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+        
+    }
+    override func tableView(_ tableView: UITableView, commit editingStyle:UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+       
+    }
+}
+```
+ 
