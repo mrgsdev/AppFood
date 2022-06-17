@@ -4,6 +4,7 @@
     <accessibilityOverrides dynamicTypePreference="0"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -263,7 +264,6 @@
                                     </constraints>
                                     <connections>
                                         <outlet property="headerImageView" destination="zqk-Ml-0kE" id="ZXo-Xs-dVJ"/>
-                                        <outlet property="heartButton" destination="10D-kM-vBS" id="Lc4-lu-6JF"/>
                                         <outlet property="nameLabel" destination="gjY-VS-W4E" id="5UY-ab-ceY"/>
                                         <outlet property="ratingImageView" destination="ZVb-I1-dlQ" id="3md-WP-0At"/>
                                         <outlet property="typeLabel" destination="4Fg-5S-I6P" id="Lv2-Cp-bhZ"/>
@@ -421,20 +421,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Vce-Mb-6iH">
-                        <barButtonItem key="rightBarButtonItem" style="done" id="tog-lv-XSn">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="10D-kM-vBS">
-                                <rect key="frame" x="303.33333333333331" y="0.0" width="70.666666666666686" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30"/>
-                                    <color key="baseForegroundColor" name="NavigationBarTitle"/>
-                                </buttonConfiguration>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" id="EOw-wE-2lP">
+                            <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
+                            <color key="tintColor" name="NavigationBarTitle"/>
+                            <connections>
+                                <action selector="saveFavorite" destination="df7-Sr-2Ed" id="qdw-Mg-Ui9"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="favoriteBarButton" destination="EOw-wE-2lP" id="55r-md-SM6"/>
                         <outlet property="headerView" destination="tSf-fF-qna" id="2Ir-KE-ama"/>
                         <outlet property="tableView" destination="N3l-rx-4wz" id="hdW-0A-K1G"/>
                     </connections>

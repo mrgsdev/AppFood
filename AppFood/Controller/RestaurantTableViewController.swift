@@ -9,19 +9,22 @@ import UIKit
 import CoreData
 class RestaurantTableViewController: UITableViewController {
     @IBOutlet var emptyRestaurantView: UIView!
-    
+    var searchController: UISearchController!
     var restaurants:[Restaurant] = []
     var fetchResultController: NSFetchedResultsController<Restaurant>!
     lazy var dataSource = configureDataSource() //initial value cannot be retrieved until after the instance initialization completes.
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         customNavBar()
+        
         showBackgroundView()
         tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.dataSource = dataSource
         tableView.separatorStyle = .none
         fetchRestaurantData()
+        customSearchController()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -52,9 +55,12 @@ class RestaurantTableViewController: UITableViewController {
         tableView.backgroundView?.isHidden = restaurants.count == 0 ? false :
         true
     }
-    func fetchRestaurantData() {
+    func fetchRestaurantData(searchText:String = "") {
         // Fetch data from data store
         let fetchRequest: NSFetchRequest<Restaurant> = Restaurant.fetchRequest()
+        if !searchText.isEmpty {
+            fetchRequest.predicate = NSPredicate(format: "name CONTAINS[c] %@",searchText)
+        }
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
@@ -63,7 +69,7 @@ class RestaurantTableViewController: UITableViewController {
             fetchResultController.delegate = self
             do {
                 try fetchResultController.performFetch()
-                updateSnapshot()
+                updateSnapshot(animatingChange: searchText.isEmpty ? false : true)
             } catch {
                 print(error)
             }
@@ -87,6 +93,18 @@ class RestaurantTableViewController: UITableViewController {
             navigationController?.navigationBar.scrollEdgeAppearance = appearance
         }
     }
+    func customSearchController(){
+        
+        
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        self.navigationItem.searchController = searchController
+        searchController.searchBar.placeholder = "Search restaurants..."
+        searchController.searchBar.backgroundImage = UIImage()
+        searchController.searchBar.tintColor = UIColor(named: "NavigationBarTitle")
+    }
     // MARK: - Table view data source
     
     func configureDataSource() -> RestaurantDiffableDataSource {
@@ -103,7 +121,7 @@ class RestaurantTableViewController: UITableViewController {
         }
         return dataSource
     }
-     
+    
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
     }
@@ -114,6 +132,9 @@ class RestaurantTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // Get the selected restaurant
         guard let restaurant = self.dataSource.itemIdentifier(for: indexPath) else {
+            return UISwipeActionsConfiguration()
+        }
+        if searchController.isActive {
             return UISwipeActionsConfiguration()
         }
         // Delete action
@@ -129,11 +150,11 @@ class RestaurantTableViewController: UITableViewController {
             // Call completion handler to dismiss the action button
             completionHandler(true)
         }
-       
+        
         let favoriteLabel = self.restaurants[indexPath.row].isFavorite ? "Dislike" : "Like"
         let favoriteAction = UIContextualAction(style: .destructive, title: favoriteLabel) { (action, sourceView, completionHandler) in
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-                 
+                
                 let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
                 
                 cell.favoriteImageView.isHidden = self.restaurants[indexPath.row].isFavorite
@@ -142,7 +163,7 @@ class RestaurantTableViewController: UITableViewController {
                 
                 // Call completion handler to dismiss the action button
                 completionHandler(true)
-                 
+                
                 appDelegate.saveContext()
                 // Update the view
                 self.updateSnapshot(animatingChange: true)
@@ -184,10 +205,17 @@ class RestaurantTableViewController: UITableViewController {
 }
 extension RestaurantTableViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-           updateSnapshot()
-       }
+        updateSnapshot()
+    }
 }
-
+extension RestaurantTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else {
+            return
+        }
+        fetchRestaurantData(searchText: searchText)
+    }
+}
 // MARK: - Old
 //override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        // Create an option menu as an action sheet

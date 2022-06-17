@@ -174,11 +174,11 @@
 		42FF7EE02854FBFD00FC15C5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				423798542858DB10004627F8 /* NewRestaurantController.swift */,
-				427A80EC2857CCB80047E419 /* ReviewViewController.swift */,
-				42879D3A2855D4DB00DE46E3 /* RestaurantDetailViewController.swift */,
-				42B085E92857631000F21216 /* MapViewController.swift */,
 				42B6F8D7285481E700D8E28F /* RestaurantTableViewController.swift */,
+				42879D3A2855D4DB00DE46E3 /* RestaurantDetailViewController.swift */,
+				427A80EC2857CCB80047E419 /* ReviewViewController.swift */,
+				423798542858DB10004627F8 /* NewRestaurantController.swift */,
+				42B085E92857631000F21216 /* MapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
