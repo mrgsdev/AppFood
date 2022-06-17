@@ -3,7 +3,7 @@
 
  ```
 A food app that allows users to save their favorite restaurants.
-This app helps users to create a personal food guide
+This app helps users to create a personal food guide.
   ```
  # Stack
  ```UIKit``` ```Storyboard``` ```MVC``` ```MapKit```  ```CoreData```
