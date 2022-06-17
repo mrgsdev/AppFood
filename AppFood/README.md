@@ -59,4 +59,17 @@ class RestaurantDiffableDataSource: UITableViewDiffableDataSource<Section, Resta
     }
 }
 ```
- 
+ ## UISearch 
+ ``` swift
+  func customSearchController(){
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        self.navigationItem.searchController = searchController
+ // or 👇
+ //     tableView.tableHeaderView = searchController.searchBar 
+        searchController.searchBar.placeholder = "Search restaurants..."
+        searchController.searchBar.backgroundImage = UIImage()
+        searchController.searchBar.tintColor = UIColor(named: "NavigationBarTitle")
+    }
+ ``` 
