@@ -19,7 +19,7 @@ class WalkthroughViewController: UIViewController {
     @IBOutlet var skipButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //
         // Do any additional setup after loading the view.
     }
     
