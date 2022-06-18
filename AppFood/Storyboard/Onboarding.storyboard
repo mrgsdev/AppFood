@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4n-vU-fQn">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="589"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="588.66666666666663"/>
                                 <connections>
                                     <segue destination="KpC-We-TfH" kind="embed" id="d1C-ge-ds6"/>
                                 </connections>
@@ -52,6 +52,9 @@
                                                 <buttonConfiguration key="configuration" style="filled" title="NEXT">
                                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleHeadline"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="nextButtonTappedWithSender:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aZq-YI-9Si"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Dx-Mb-8hD">
                                                 <rect key="frame" x="68" y="115" width="54.333333333333343" height="31"/>
@@ -60,6 +63,9 @@
                                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="baseForegroundColor" systemColor="labelColor"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="skipButtonTappedWithSender:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="MTc-j8-beG"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
