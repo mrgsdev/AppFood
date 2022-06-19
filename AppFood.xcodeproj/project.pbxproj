@@ -13,6 +13,8 @@
 		420F46B2285E14980074D075 /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F46B1285E14980074D075 /* WalkthroughViewController.swift */; };
 		42310A12285F3E360051671D /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42310A10285F3E360051671D /* About.storyboard */; };
 		42310A14285F3E510051671D /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42310A13285F3E510051671D /* Discover.storyboard */; };
+		42310A18285F42290051671D /* AboutTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42310A17285F42290051671D /* AboutTableTableViewController.swift */; };
+		42310A1A285F4B970051671D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42310A19285F4B970051671D /* WebViewController.swift */; };
 		423798532858D7B9004627F8 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423798522858D7B9004627F8 /* RoundedTextField.swift */; };
 		423798552858DB10004627F8 /* NewRestaurantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423798542858DB10004627F8 /* NewRestaurantController.swift */; };
 		424E9FD328537E0A00B71C12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E9FD228537E0A00B71C12 /* AppDelegate.swift */; };
@@ -48,6 +50,8 @@
 		420F46B1285E14980074D075 /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
 		42310A11285F3E360051671D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = AppFood/Storyboard/Base.lproj/About.storyboard; sourceTree = "<group>"; };
 		42310A13285F3E510051671D /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
+		42310A17285F42290051671D /* AboutTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableTableViewController.swift; sourceTree = "<group>"; };
+		42310A19285F4B970051671D /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		423798522858D7B9004627F8 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		423798542858DB10004627F8 /* NewRestaurantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantController.swift; sourceTree = "<group>"; };
 		424E9FCF28537E0A00B71C12 /* AppFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +206,8 @@
 				427A80EC2857CCB80047E419 /* ReviewViewController.swift */,
 				423798542858DB10004627F8 /* NewRestaurantController.swift */,
 				42B085E92857631000F21216 /* MapViewController.swift */,
+				42310A17285F42290051671D /* AboutTableTableViewController.swift */,
+				42310A19285F4B970051671D /* WebViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -308,7 +314,9 @@
 				42F5BD5428563D580090E29B /* UIColor+Ext.swift in Sources */,
 				42B6AC1B2855E6CA0058AF20 /* RestaurantDetailTwoColumnCell.swift in Sources */,
 				424E9FD528537E0A00B71C12 /* SceneDelegate.swift in Sources */,
+				42310A18285F42290051671D /* AboutTableTableViewController.swift in Sources */,
 				42B085E828575A1A00F21216 /* RestaurantDetailMapCell.swift in Sources */,
+				42310A1A285F4B970051671D /* WebViewController.swift in Sources */,
 				420F46AD285E10C00074D075 /* WalkthroughContentViewController.swift in Sources */,
 				42A892A02855C8320029BB30 /* RestaurantDiffableDataSource.swift in Sources */,
 				420F46B2285E14980074D075 /* WalkthroughViewController.swift in Sources */,
