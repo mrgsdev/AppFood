@@ -111,7 +111,7 @@ class RestaurantTableViewController: UITableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         
         self.navigationItem.searchController = searchController
-        searchController.searchBar.placeholder = "Search restaurants..."
+        searchController.searchBar.placeholder = String(localized: "Search restaurants...")
         searchController.searchBar.backgroundImage = UIImage()
         searchController.searchBar.tintColor = UIColor(named: "NavigationBarTitle")
     }
@@ -148,7 +148,7 @@ class RestaurantTableViewController: UITableViewController {
             return UISwipeActionsConfiguration()
         }
         // Delete action
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
+        let deleteAction = UIContextualAction(style: .destructive, title: String(localized: "Delete")) { (action, sourceView, completionHandler) in
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 let context = appDelegate.persistentContainer.viewContext
                 // Delete the item
@@ -161,7 +161,7 @@ class RestaurantTableViewController: UITableViewController {
             completionHandler(true)
         }
         
-        let favoriteLabel = self.restaurants[indexPath.row].isFavorite ? "Dislike" : "Like"
+        let favoriteLabel = self.restaurants[indexPath.row].isFavorite ? String(localized: "Dislike") : String(localized: "Like")
         let favoriteAction = UIContextualAction(style: .destructive, title: favoriteLabel) { (action, sourceView, completionHandler) in
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 
@@ -181,7 +181,7 @@ class RestaurantTableViewController: UITableViewController {
             
         }
         // Share action
-        let shareAction = UIContextualAction(style: .normal, title: "Share") { (action, sourceView, completionHandler) in
+        let shareAction = UIContextualAction(style: .normal, title: String(localized: "Share")) { (action, sourceView, completionHandler) in
             
             let defaultText = "Just checking in at " + restaurant.name
             let activityController: UIActivityViewController

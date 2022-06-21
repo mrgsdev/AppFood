@@ -20,10 +20,10 @@ class AboutTableTableViewController: UITableViewController {
         var image:String
     }
     var sectionContent = [
-        [LinkItem(text: "Rate us on App Store", link: "https://www.apple.com/ios/app-store/", image:"store")],
+        [LinkItem(text: String(localized: "Rate us on App Store",comment: "Rate us on App Store"), link: "https://www.apple.com/ios/app-store/", image:"store")],
         [
             LinkItem(text: "GitHub", link: "https://github.com/mrgsdev", image: "github"),
-            LinkItem(text: "Telegram", link: "https://teleg.run/mrgsdev", image: "telegram"),
+            LinkItem(text: "Telegram", link: "https://t.me/mrgsdev", image: "telegram"),
         ],
         [LinkItem(text: "1.0", link: "", image: "")]
     ]
@@ -35,40 +35,8 @@ class AboutTableTableViewController: UITableViewController {
         tableView.separatorStyle = .none
         updateSnapshot()
     }
-    func customNavBar(){
-        //        navigationController?.navigationBar.prefersLargeTitles = true
-        // Customize the navigation bar appearance
-        if let appearance = navigationController?.navigationBar.standardAppearance {
-            appearance.configureWithTransparentBackground()
-            if let customFont = UIFont(name: "Nunito-Bold", size: 20.0) {
-                appearance.titleTextAttributes = [.foregroundColor: UIColor(named: "NavigationBarTitle")!]
-                appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "NavigationBarTitle")!, .font: customFont]
-            }
-            navigationController?.navigationBar.standardAppearance = appearance
-            navigationController?.navigationBar.compactAppearance = appearance
-            navigationController?.navigationBar.scrollEdgeAppearance = appearance
-            
-        }
-    }
-    // MARK: - Table view diffable data source
-    func configureDataSource() -> UITableViewDiffableDataSource<Section, LinkItem> {
-        let cellIdentifier = "aboutcell"
-        let dataSource = UITableViewDiffableDataSource<Section, LinkItem>(tableView: tableView) { (tableView, indexPath, linkItem) -> UITableViewCell? in
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-            cell.textLabel?.text = linkItem.text
-            cell.imageView?.image = UIImage(named: linkItem.image)
-            return cell
-        }
-        return dataSource
-    }
-    func updateSnapshot() {
-        // Create a snapshot and populate the data
-        var snapshot = NSDiffableDataSourceSnapshot<Section, LinkItem>()
-        snapshot.appendSections([.feedback, .followus])
-        snapshot.appendItems(sectionContent[0], toSection: .feedback)
-        snapshot.appendItems(sectionContent[1], toSection: .followus)
-        dataSource.apply(snapshot, animatingDifferences: false)
-    }
+  
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
  
 //        if indexPath.section == 1,indexPath.row == 1 {
@@ -108,4 +76,41 @@ class AboutTableTableViewController: UITableViewController {
         }
     }
     
+}
+extension AboutTableTableViewController{
+    // MARK: - Table view diffable data source
+    func configureDataSource() -> UITableViewDiffableDataSource<Section, LinkItem> {
+        let cellIdentifier = "aboutcell"
+        let dataSource = UITableViewDiffableDataSource<Section, LinkItem>(tableView: tableView) { (tableView, indexPath, linkItem) -> UITableViewCell? in
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+            cell.textLabel?.text = linkItem.text
+            cell.imageView?.image = UIImage(named: linkItem.image)
+            return cell
+        }
+        return dataSource
+    }
+    func updateSnapshot() {
+        // Create a snapshot and populate the data
+        var snapshot = NSDiffableDataSourceSnapshot<Section, LinkItem>()
+        snapshot.appendSections([.feedback, .followus])
+        snapshot.appendItems(sectionContent[0], toSection: .feedback)
+        snapshot.appendItems(sectionContent[1], toSection: .followus)
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
+    
+    func customNavBar(){
+        //        navigationController?.navigationBar.prefersLargeTitles = true
+        // Customize the navigation bar appearance
+        if let appearance = navigationController?.navigationBar.standardAppearance {
+            appearance.configureWithTransparentBackground()
+            if let customFont = UIFont(name: "Nunito-Bold", size: 20.0) {
+                appearance.titleTextAttributes = [.foregroundColor: UIColor(named: "NavigationBarTitle")!]
+                appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "NavigationBarTitle")!, .font: customFont]
+            }
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.compactAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+            
+        }
+    }
 }
