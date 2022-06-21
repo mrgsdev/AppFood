@@ -73,3 +73,9 @@ class RestaurantDiffableDataSource: UITableViewDiffableDataSource<Section, Resta
         searchController.searchBar.tintColor = UIColor(named: "NavigationBarTitle")
     }
  ``` 
+## Localization language
+
+<img width="654" alt="1" src="https://user-images.githubusercontent.com/107209053/174827988-c88e6d40-6add-4bd0-8d37-d7239ec5ba44.png">
+Export
+<img width="255" alt="2" src="https://user-images.githubusercontent.com/107209053/174827999-5cbb2c3e-e529-402a-ae16-7c08c08006af.png">
+<img width="795" alt="3" src="https://user-images.githubusercontent.com/107209053/174828002-f7547dd8-fd0d-4c36-8b28-cc03d4b0a2f0.png">
