@@ -38,11 +38,7 @@ class AboutTableTableViewController: UITableViewController {
   
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
- 
-//        if indexPath.section == 1,indexPath.row == 1 {
-//             return
-//        }
-            print(indexPath.row)
+
         switch indexPath.section {
         case 0: performSegue(withIdentifier: "showWebView", sender: self)
         case 1: openWithSafariViewController(indexPath: indexPath)

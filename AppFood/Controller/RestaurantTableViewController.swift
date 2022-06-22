@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import UserNotifications
+
 class RestaurantTableViewController: UITableViewController {
     @IBOutlet var emptyRestaurantView: UIView!
     var searchController: UISearchController!
@@ -27,7 +28,6 @@ class RestaurantTableViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         customNavBar()
         showBackgroundView()
         tableView.cellLayoutMarginsFollowReadableWidth = true
@@ -54,6 +54,8 @@ class RestaurantTableViewController: UITableViewController {
         tableView.backgroundView = emptyRestaurantView
         tableView.backgroundView?.isHidden = restaurants.count == 0 ? false : true
     }
+    
+    // MARK: - CoreData
     func updateSnapshot(animatingChange: Bool = false) {
         if let fetchedObjects = fetchResultController.fetchedObjects {
             restaurants = fetchedObjects
@@ -87,6 +89,8 @@ class RestaurantTableViewController: UITableViewController {
             
         }
     }
+    
+    //MARK: - Custom Nav&Seacrh
     func customNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.backButtonTitle = ""
@@ -105,8 +109,6 @@ class RestaurantTableViewController: UITableViewController {
         }
     }
     func customSearchController(){
-        
-        
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
