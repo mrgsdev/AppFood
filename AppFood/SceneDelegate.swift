@@ -23,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void ){
         completionHandler(handleQuickAction(shortcutItem: shortcutItem))
     }
-    
     private func handleQuickAction(shortcutItem: UIApplicationShortcutItem) -> Bool {
         let shortcutType = shortcutItem.type
         guard let shortcutIdentifier = QuickAction(fullIdentifier: shortcutType) else {
