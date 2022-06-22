@@ -51,3 +51,8 @@
 "Delete from favorites" = "Удалить из избранных";
 
 "Like as favorite" = "Добавить в избранные";
+
+"Restaurant Recommendation" = "Рекомендация по ресторанам";
+
+"Try new food today" = "Попробуйте новые блюда сегодня";
+"I recommend you to check out %@. The restaurant is one of your favorites. It is located at %@. Would you like to give it a try?" = "Я рекомендую вам проверить  %@. Ресторан является одним из ваших любимых. Он расположен по адресу  %@. Не хотите попробовать?";
