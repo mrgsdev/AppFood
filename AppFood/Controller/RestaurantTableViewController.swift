@@ -278,10 +278,15 @@ class RestaurantTableViewController: UITableViewController {
             
             let heartImage = self.restaurants[indexPath.row].isFavorite ? "heart.slash.fill" : "heart.fill"
             let favoriteAction = UIAction(title: favouriteButton, image: UIImage(systemName: heartImage)) { action in
-                
+                // Delete the row from the data store
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
                 self.restaurants[indexPath.row].isFavorite.toggle()
+                    
+                    appDelegate.saveContext()
+                
                 cell.favoriteImageView.isHidden = !self.restaurants[indexPath.row].isFavorite
+                }
             }
             
             let shareAction = UIAction(title: String(localized:"Share"), image: UIImage(systemName: "square.and.arrow.up")) { action in
