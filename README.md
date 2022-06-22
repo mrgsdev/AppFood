@@ -19,3 +19,10 @@ This app helps users to create a personal food guide.
 ![44](https://user-images.githubusercontent.com/107209053/174886499-b46d6bfd-8275-4c2e-9440-0ec9f50bf548.png)
 ![111](https://user-images.githubusercontent.com/107209053/175041129-6d68c8aa-633a-4588-9380-0da9e8c414cc.gif)
 ![11111](https://user-images.githubusercontent.com/107209053/175041106-3fa3a785-e5bb-4d15-a7a2-56cbdf6fe091.gif)
+
+
+## Download All Version App
+
+[Click](https://clck.ru/rcaF6)
+
+<img width="676" alt="Снимок экрана 2022-06-22 в 16 39 25" src="https://user-images.githubusercontent.com/107209053/175043140-2cb20331-be1b-4fe6-b08a-040dd4f2c3f4.png">
