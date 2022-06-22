@@ -201,7 +201,7 @@
         <!--Restaurant Detail View Controller-->
         <scene sceneID="NAJ-kb-RJx">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="df7-Sr-2Ed" customClass="RestaurantDetailViewController" customModule="AppFood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RestaurantDetailViewController" hidesBottomBarWhenPushed="YES" id="df7-Sr-2Ed" customClass="RestaurantDetailViewController" customModule="AppFood" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DrE-Fq-xRx">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -908,7 +908,7 @@
         <segue reference="qLt-M0-b4W"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="angry" width="128" height="128"/>
+        <image name="angry" width="78" height="103"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="cool" width="78" height="83"/>
         <image name="emptydata" width="1440" height="1024"/>

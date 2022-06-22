@@ -16,7 +16,7 @@ class RestaurantTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
-                return
+            return
         }
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
@@ -210,7 +210,86 @@ class RestaurantTableViewController: UITableViewController {
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction,favoriteAction])
         return swipeConfiguration
     }
-    
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        // Get the selected restaurant
+        guard let restaurant = self.dataSource.itemIdentifier(for: indexPath) else {
+            return nil
+        }
+        
+        let configuration = UIContextMenuConfiguration(identifier: indexPath.row as NSCopying, previewProvider: {
+            
+            guard let restaurantDetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "RestaurantDetailViewController") as? RestaurantDetailViewController else {
+                return nil
+            }
+            
+            restaurantDetailViewController.restaurant = restaurant
+            
+            return restaurantDetailViewController
+            
+        }) { actions in
+            let favouriteButton = self.restaurants[indexPath.row].isFavorite ? String(localized: "Delete from favorites") : String(localized: "Like as favorite")
+            
+           let heartImage = self.restaurants[indexPath.row].isFavorite ? "heart.slash.fill" : "heart.fill"
+            let favoriteAction = UIAction(title: favouriteButton, image: UIImage(systemName: heartImage)) { action in
+                
+                let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+                self.restaurants[indexPath.row].isFavorite.toggle()
+                cell.favoriteImageView.isHidden = !self.restaurants[indexPath.row].isFavorite
+            }
+            
+            let shareAction = UIAction(title: String(localized:"Share"), image: UIImage(systemName: "square.and.arrow.up")) { action in
+                
+                let defaultText = NSLocalizedString("Just checking in at ", comment: "Just checking in at") + self.restaurants[indexPath.row].name
+                
+                let activityController: UIActivityViewController
+                
+                if let imageToShare = UIImage(data: restaurant.image as Data) {
+                    activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+                } else  {
+                    activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+                }
+                
+                self.present(activityController, animated: true, completion: nil)
+            }
+            
+            let deleteAction = UIAction(title: String(localized:"Delete"), image: UIImage(systemName: "trash"), attributes: .destructive) { action in
+                
+                // Delete the row from the data store
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                    let context = appDelegate.persistentContainer.viewContext
+                    let restaurantToDelete = self.fetchResultController.object(at: indexPath)
+                    context.delete(restaurantToDelete)
+                    
+                    appDelegate.saveContext()
+                }
+            }
+
+            // Create and return a UIMenu with the share action
+            return UIMenu(title: "", children: [favoriteAction, shareAction, deleteAction])
+        }
+        
+        return configuration
+    }
+    override func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        
+        guard let selectedRow = configuration.identifier as? Int else {
+            print("Failed to retrieve the row number")
+            return
+        }
+        
+        guard let restaurantDetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "RestaurantDetailViewController") as? RestaurantDetailViewController else {
+            
+            return
+        }
+        
+        restaurantDetailViewController.restaurant = self.restaurants[selectedRow]
+        
+        animator.preferredCommitStyle = .pop
+        animator.addCompletion {
+            self.show(restaurantDetailViewController, sender: self)
+        }
+    }
     
 }
 extension RestaurantTableViewController: NSFetchedResultsControllerDelegate {
@@ -226,62 +305,3 @@ extension RestaurantTableViewController: UISearchResultsUpdating {
         fetchRestaurantData(searchText: searchText)
     }
 }
-// MARK: - Old
-//override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        // Create an option menu as an action sheet
-//        let optionMenu = UIAlertController(title: nil, message: "Что вы хотите сделать?", preferredStyle: .actionSheet)
-//        // Add actions to the menu
-//        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-//
-//
-//        let reserveAction = UIAlertAction(title: "Reserve a table", style: .default){ action in
-//            let alertMessage = UIAlertController(title: "Пока не доступно", message: "Извините, эта функция пока недоступна. Пожалуйста, повторите попытку позже.", preferredStyle: .alert)
-//            alertMessage.addAction(UIAlertAction(title: "Принять", style: .default,handler: nil))
-//            self.present(alertMessage, animated: true, completion: nil)
-//        }
-//
-//        // Mark as favorite action
-//        let favoriteActionTitle = self.restaurants[indexPath.row].isFavorite ? "Удалить из любимых" : "Отметить как любимое"
-//        let favoriteAction = UIAlertAction(title: favoriteActionTitle, style: .default, handler: { action in
-//            let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
-//            cell.favoriteImageView.isHidden = self.restaurants[indexPath.row].isFavorite
-//
-//            self.restaurants[indexPath.row].isFavorite = self.restaurants[indexPath.row].isFavorite ? false : true
-//        })
-//        optionMenu.addAction(cancelAction)
-//        optionMenu.addAction(reserveAction)
-//        optionMenu.addAction(favoriteAction)
-//        //alertAction for iPads
-//        if let popoverController = optionMenu.popoverPresentationController {
-//            if let cell = tableView.cellForRow(at: indexPath) {
-//                popoverController.sourceView = cell
-//                popoverController.sourceRect = cell.bounds
-//            }
-//        }
-//        // Display the menu
-//        present(optionMenu, animated: true, completion: nil)
-//        // Deselect the row
-//        tableView.deselectRow(at: indexPath, animated: false)
-//    }
-//
-//---
-//    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let favoriteAction = UIContextualAction(style: .destructive, title: "") { (action, sourceView, completionHandler) in
-//
-//            let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
-//
-//            cell.favoriteImageView.isHidden = self.restaurants[indexPath.row].isFavorite
-//
-//            self.restaurants[indexPath.row].isFavorite = self.restaurants[indexPath.row].isFavorite ? false : true
-//
-//            // Call completion handler to dismiss the action button
-//            completionHandler(true)
-//        }
-//        // Configure swipe action
-//        favoriteAction.backgroundColor = UIColor.systemYellow
-//        favoriteAction.image = UIImage(systemName: self.restaurants[indexPath.row].isFavorite ? "heart.slash.fill" : "heart.fill")
-//
-//        let swipeConfiguration = UISwipeActionsConfiguration(actions: [favoriteAction])
-//
-//        return swipeConfiguration
-//    }
