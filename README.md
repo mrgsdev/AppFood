@@ -12,7 +12,8 @@ This app helps users to create a personal food guide.
 
 
 
-  ## Screenshoot
-  ![1](https://user-images.githubusercontent.com/107209053/174123583-f4068ff7-9a69-4913-9351-c4856ee88c04.jpg)
-![2](https://user-images.githubusercontent.com/107209053/174123588-f7d18b10-9e05-46aa-8109-6f0631fc413f.jpg)
-![3](https://user-images.githubusercontent.com/107209053/174123592-d37523a4-df34-4056-9e49-6c0a7d76d8bb.jpg)
+  ## Screenshoot 
+![1](https://user-images.githubusercontent.com/107209053/174886478-191308d9-7484-4a36-a505-3cb90eae1fde.png)
+![2](https://user-images.githubusercontent.com/107209053/174886483-2a5d8a0e-d262-4a9c-ab56-2e18d3c621f2.png)
+![3](https://user-images.githubusercontent.com/107209053/174886491-35e58e47-b97b-4c6c-b520-7d26f6f0246f.png)
+![44](https://user-images.githubusercontent.com/107209053/174886499-b46d6bfd-8275-4c2e-9440-0ec9f50bf548.png)
