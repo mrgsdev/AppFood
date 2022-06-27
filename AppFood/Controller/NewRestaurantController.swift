@@ -77,6 +77,7 @@ class NewRestaurantController: UITableViewController {
             
         }
     }
+     
     // MARK: - Table view data source
     @IBAction func saveButtonTapped(sender: UIButton) {
         if nameTextField.text == "" || typeTextField.text == "" || addressTextField.text == "" || phoneTextField.text == "" || descriptionTextView.text == "" {

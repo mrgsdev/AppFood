@@ -189,7 +189,6 @@
 		42FF7EDE2854FBEA00FC15C5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				42B6AC162855DE390058AF20 /* RestaurantDetailHeaderView.swift */,
 				42A8929F2855C8320029BB30 /* RestaurantDiffableDataSource.swift */,
 				42FF7EDC2854F82D00FC15C5 /* Restaurant.swift */,
 			);
@@ -199,6 +198,7 @@
 		42FF7EDF2854FBF900FC15C5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				42B6AC162855DE390058AF20 /* RestaurantDetailHeaderView.swift */,
 				42B085E728575A1A00F21216 /* RestaurantDetailMapCell.swift */,
 				42B6AC182855E4AA0058AF20 /* RestaurantDetailTextCell.swift */,
 				42B6AC1A2855E6CA0058AF20 /* RestaurantDetailTwoColumnCell.swift */,
